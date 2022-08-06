@@ -7,4 +7,7 @@ if __name__ == '__main__':
     with open('datetimes.json', 'r') as f:
         dates_map = json.load(f)
         for filename in dates_map:
-            os.utime(filename, (dates_map[filename], dates_map[filename]))
+            try:
+                os.utime(filename, (dates_map[filename], dates_map[filename]))
+            except FileNotFoundError:
+                pass  # Not all files are necessary there when cleaning
